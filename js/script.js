@@ -16,7 +16,7 @@ const cpapCuidado = [
   "WebMais: Ixi, parece que não tem estoque.",
   "API: Olha o correios, acho que vai extraditar",
   "Cliente: A máscara rasgou, tem garantia? ",
-  "Ciente: Compra o meu CPAP de novo?",
+  "Cliente: Compra o meu CPAP de novo?",
   "Alerta: Olha o cartão clonado",
   "Cuidado: Olha o Hacker querendo validar o cartão"
 ];
@@ -80,7 +80,7 @@ const loop = setInterval(() => {
     mario.style.marginLeft = "50px"
     score_label.style.color = "red";
     score_label.innerHTML = `${(valor * -1).toFixed(2)}`;
-    msg_label.innerHTML = "O Criente desistiu da compra."
+    msg_label.innerHTML = "O Cliente desistiu da compra."
     perdeu.style.color = "red";
     perdeu.innerHTML = "Que Pena, Você não bateu a meta!";
     clearInterval(loop);
