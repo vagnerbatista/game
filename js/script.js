@@ -69,31 +69,51 @@ const loop = setInterval(() => {
     .getComputedStyle(mario)
     .bottom.replace("px", "");
   if (pipePosition < 110 && pipePosition > 0 && marioPosition < 100) {
+    pipe.src = "./img/bombExp.gif";
     nuvem.style.animationPlayState = 'paused';
     msg_div.style.animation = "none";
+    pipe.style.width = "250px"
     pipe.style.animation = "none";
     pipe.style.left = `${pipePosition}px`;
     mario.style.animation = "animacaoObjeto 2s ease-in-out forwards";
     mario.style.bottom = `${marioPosition}px` 
     mario.src = "./img/game-over.png"
     mario.style.width = "90px"
-    mario.style.marginLeft = "50px"
+    mario.style.marginLeft = "140px"
     score_label.style.color = "red";
-    score_label.innerHTML = `${(valor * -1).toFixed(2)}`;
-    msg_label.innerHTML = "O Cliente desistiu da compra."
     perdeu.style.color = "red";
+    atualizarValor(score_label);
+    msg_label.innerHTML = "O Cliente desistiu da compra."
     perdeu.innerHTML = "Que Pena, Você não bateu a meta!";
     clearInterval(loop);
     clearInterval(cuidado);
     gameRunning = false; // Define o jogo como não em execução
     jump = () => {};
     setTimeout(() =>{
+      pipe.src = "";
       perdeu.innerHTML = "";
       document.getElementById("restartButton").style.display = "block";
-    }, 2000);
+    }, 1500);
 
   }
 }, 10);
+
+function atualizarValor(h2) {
+  let valor = parseFloat(h2.textContent);
+  let desconto = 0.20; // 10%
+  let intervalo = 80; // 0.25 segundos
+
+  let contador = 0;
+  let interval = setInterval(function() {
+      if (contador >= 100 && valor > 0) {
+          clearInterval(interval);
+      } else {
+          valor -= (valor * desconto); // Aplica o desconto
+          h2.innerText = valor.toFixed(2); // Atualiza o h2
+          contador++;
+      }
+  }, intervalo);
+}
 
 // Adiciona event listener para o botão de iniciar jogo
 document.getElementById("startButton").addEventListener("click", () => {

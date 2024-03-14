@@ -6,13 +6,15 @@
 
 .game-board {
   width: 100%;
-  height: 100vh; /* Alterado para 100% da altura da viewport */
+  height: 100vh;
+  /* Alterado para 100% da altura da viewport */
   border: 30px solid #333;
   margin: 0 auto;
   position: relative;
   overflow: hidden;
   background-image: url("./../img/body.jpg");
-  background-size: 100% 100%; /* Alterado para cobrir 100% da largura e altura */
+  background-size: 100% 100%;
+  /* Alterado para cobrir 100% da largura e altura */
   background-repeat: no-repeat;
 }
 
@@ -41,6 +43,7 @@
   top: 50px;
   left: 30px;
 }
+
 .score {
   padding-left: 10px;
   margin-top: 5px;
@@ -57,20 +60,24 @@
   font-family: "DotGothic16", sans-serif;
   font-size: 15px;
   font-style: normal;
-  color:#ffee09;
+  color: #ffee09;
   bottom: 320px;
   right: 20px;
-  width: 700px; /* ajuste conforme necessário */
-  height: 50px; /* ajuste conforme necessário */
+  width: 700px;
+  /* ajuste conforme necessário */
+  height: 50px;
+  /* ajuste conforme necessário */
 }
 
 @keyframes jumpAnimation {
   0% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-20px);
   }
+
   100% {
     transform: translateY(0);
   }
@@ -82,9 +89,13 @@
   bottom: -3px;
 }
 
-.borda { text-shadow:white 2px -2px, white -2px 2px, white 2px 2px, white -2px -2px}
+.borda {
+  text-shadow: white 2px -2px, white -2px 2px, white 2px 2px, white -2px -2px
+}
 
-.borda-black { text-shadow:#333 1px -1px, #333 -1px 1px, #333 1px 1px, #333 -1px -1px}
+.borda-black {
+  text-shadow: #333 1px -1px, #333 -1px 1px, #333 1px 1px, #333 -1px -1px
+}
 
 
 .jump {
@@ -95,7 +106,7 @@
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); 
+  transform: translate(-50%, -50%);
   font-family: "DotGothic16", sans-serif;
   color: chocolate;
   font-size: 35px;
@@ -105,9 +116,12 @@
 }
 
 @keyframes subir {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-30px);
   }
@@ -117,18 +131,21 @@
   0% {
     transform: translateY(0);
     opacity: 1;
-}
-50% {
-    transform: translateY(-150px);
+  }
+
+  50% {
+    transform: translateY(-180px);
     opacity: 1;
-}
-75% {
+  }
+
+  75% {
     opacity: 0;
-}
-100% {
-  transform: translateY(150px);
-  opacity: 0;
-}
+  }
+
+  100% {
+    transform: translateY(180px);
+    opacity: 0;
+  }
 }
 
 .paused {
@@ -168,11 +185,11 @@
 }
 
 @keyframes nuvem-animation {
-    from {
-        right: -550px;
-    }
+  from {
+    right: -550px;
+  }
 
-    to {
-        right: 100%;
-    }
+  to {
+    right: 100%;
+  }
 }
