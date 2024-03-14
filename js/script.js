@@ -18,23 +18,26 @@ const cpapCuidado = [
   "Cliente: A máscara rasgou, tem garantia? ",
   "Cliente: Compra o meu CPAP de novo?",
   "Alerta: Olha o cartão clonado",
-  "Cuidado: Olha o Hacker querendo validar o cartão"
+  "Cuidado: Olha o Hacker querendo validar o cartão",
 ];
 
 const cpapItens = [
   ["S10 AirSense", 3941.01],
-  ["Máscara Facial AirFit F30i - ResMed", 308.00],
-  ["kir CPAP Automático Airsense S10 - ResMed + Máscara YF-01 - Yuwell", 4167.00],
-  ["Máscara Nasal Therapy 3100 SP - Philips", 400.00],
-  ["Filtro Bacteriológico Airlife Trilogy - Vyaire", 80.00],
+  ["Máscara Facial AirFit F30i - ResMed", 308.0],
+  [
+    "kir CPAP Automático Airsense S10 - ResMed + Máscara YF-01 - Yuwell",
+    4167.0,
+  ],
+  ["Máscara Nasal Therapy 3100 SP - Philips", 400.0],
+  ["Filtro Bacteriológico Airlife Trilogy - Vyaire", 80.0],
   ["Traqueia Branca para CPAP - Nacional", 200.12],
-  ["Água Destilada - 5L", 45.00],
-  ["Tubo de Conexão para Concentrador - Salter Labs", 120.00],
-  ["Fixador Quattro FX - Nacional", 340.00],
-  ["Concentrador de Oxigênio 5LPM 110V - Yuwell", 6000.00],
-  ["Circuito de Ventilação Passivo Adulto - Phillips", 300.00],
-  ["Filtro Eletrostático Adulto - GVS", 67.00],
-  ["Máscara Nasal iVolve N5A - BMC", 560.00]
+  ["Água Destilada - 5L", 45.0],
+  ["Tubo de Conexão para Concentrador - Salter Labs", 120.0],
+  ["Fixador Quattro FX - Nacional", 340.0],
+  ["Concentrador de Oxigênio 5LPM 110V - Yuwell", 6000.0],
+  ["Circuito de Ventilação Passivo Adulto - Phillips", 300.0],
+  ["Filtro Eletrostático Adulto - GVS", 67.0],
+  ["Máscara Nasal iVolve N5A - BMC", 560.0],
 ];
 
 function itemAleatorio(lista) {
@@ -44,7 +47,7 @@ function itemAleatorio(lista) {
 
 var jump = () => {
   mario.classList.add("jump");
-  
+
   setTimeout(() => {
     if (!gameRunning) return; // Se o jogo não estiver em execução, não faça nada
     var item = itemAleatorio(cpapItens);
@@ -70,48 +73,52 @@ const loop = setInterval(() => {
     .bottom.replace("px", "");
   if (pipePosition < 110 && pipePosition > 0 && marioPosition < 100) {
     pipe.src = "./img/bombExp.gif";
-    nuvem.style.animationPlayState = 'paused';
+    nuvem.style.animationPlayState = "paused";
     msg_div.style.animation = "none";
-    pipe.style.width = "250px"
+    pipe.style.width = "250px";
+    pipe.style.bottom = "-26px";
     pipe.style.animation = "none";
     pipe.style.left = `${pipePosition}px`;
     mario.style.animation = "animacaoObjeto 2s ease-in-out forwards";
-    mario.style.bottom = `${marioPosition}px` 
-    mario.src = "./img/game-over.png"
-    mario.style.width = "90px"
-    mario.style.marginLeft = "140px"
+    mario.style.bottom = `${marioPosition}px`;
+    mario.src = "./img/game-over.png";
+    mario.style.width = "90px";
+    mario.style.marginLeft = "140px";
     score_label.style.color = "red";
     perdeu.style.color = "red";
     atualizarValor(score_label);
-    msg_label.innerHTML = "O Cliente desistiu da compra."
+    msg_label.innerHTML = "O Cliente desistiu da compra.";
     perdeu.innerHTML = "Que Pena, Você não bateu a meta!";
     clearInterval(loop);
     clearInterval(cuidado);
     gameRunning = false; // Define o jogo como não em execução
     jump = () => {};
-    setTimeout(() =>{
-      pipe.src = "";
+    setTimeout(() => {
+      pipe.style.bottom = "-26px";
+      pipe.src = "./img/fire.gif";
       perdeu.innerHTML = "";
       document.getElementById("restartButton").style.display = "block";
-    }, 1500);
-
+      setTimeout(() => {
+        pipe.src = "";
+      }, 1500);
+    }, 800);
   }
 }, 10);
 
 function atualizarValor(h2) {
   let valor = parseFloat(h2.textContent);
-  let desconto = 0.20; // 10%
+  let desconto = 0.2; // 10%
   let intervalo = 80; // 0.25 segundos
 
   let contador = 0;
-  let interval = setInterval(function() {
-      if (contador >= 100 && valor > 0) {
-          clearInterval(interval);
-      } else {
-          valor -= (valor * desconto); // Aplica o desconto
-          h2.innerText = valor.toFixed(2); // Atualiza o h2
-          contador++;
-      }
+  let interval = setInterval(function () {
+    if (contador >= 100 && valor > 0) {
+      clearInterval(interval);
+    } else {
+      valor -= valor * desconto; // Aplica o desconto
+      h2.innerText = valor.toFixed(2); // Atualiza o h2
+      contador++;
+    }
   }, intervalo);
 }
 
@@ -121,7 +128,7 @@ document.getElementById("startButton").addEventListener("click", () => {
   jump(); // Chama a função de pulo para começar o jogo
 });
 
-document.addEventListener("keydown", () =>{
+document.addEventListener("keydown", () => {
   gameRunning = true;
 });
 
