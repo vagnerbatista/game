@@ -5,7 +5,11 @@ const score_label = document.querySelector(".score");
 const msg_label = document.querySelector(".msg");
 const msg_div = document.querySelector(".corner-botton");
 const perdeu = document.querySelector(".centro");
-let valor = 0;
+var meuAudio = document.getElementById("meuAudio");
+var meuAudioEx = document.getElementById("meuAudioEx");
+meuAudio.volume = meuAudio.volume * 0.5;
+
+let valor = 0; 
 let gameRunning = false; // Flag para indicar se o jogo está em execução
 
 const cpapCuidado = [
@@ -67,11 +71,20 @@ const cuidado = setInterval(() => {
 
 const loop = setInterval(() => {
   if (!gameRunning) return; // Se o jogo não estiver em execução, não faça nada
+
+  meuAudio.play().then(function() {
+    console.log("Áudio iniciado!");
+  }).catch(function(error) {
+    console.log("Erro ao iniciar áudio:", error);
+  });
+
   const pipePosition = pipe.offsetLeft;
   const marioPosition = +window
     .getComputedStyle(mario)
     .bottom.replace("px", "");
   if (pipePosition < 110 && pipePosition > 0 && marioPosition < 100) {
+    meuAudio.pause();
+    meuAudioEx.play();
     pipe.src = "./img/bombExp.gif";
     nuvem.style.animationPlayState = "paused";
     msg_div.style.animation = "none";
