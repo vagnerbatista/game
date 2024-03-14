@@ -79,7 +79,7 @@
 .mario {
   width: 90px;
   position: absolute;
-  bottom: 0;
+  bottom: -3px;
 }
 
 .borda { text-shadow:white 2px -2px, white -2px 2px, white 2px 2px, white -2px -2px}

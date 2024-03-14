@@ -42,7 +42,7 @@ function itemAleatorio(lista) {
   return lista[indiceAleatorio];
 }
 
-const jump = () => {
+var jump = () => {
   mario.classList.add("jump");
   
   setTimeout(() => {
@@ -86,6 +86,7 @@ const loop = setInterval(() => {
     clearInterval(loop);
     clearInterval(cuidado);
     gameRunning = false; // Define o jogo como não em execução
+    jump = () => {};
     setTimeout(() =>{
       perdeu.innerHTML = "";
       document.getElementById("restartButton").style.display = "block";
