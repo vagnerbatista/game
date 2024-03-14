@@ -7,6 +7,7 @@ const msg_div = document.querySelector(".corner-botton");
 const perdeu = document.querySelector(".centro");
 var meuAudio = document.getElementById("meuAudio");
 var meuAudioEx = document.getElementById("meuAudioEx");
+const vendas = document.querySelector(".vendas");
 meuAudio.volume = meuAudio.volume * 0.5;
 
 let valor = 0; 
@@ -26,22 +27,19 @@ const cpapCuidado = [
 ];
 
 const cpapItens = [
-  ["S10 AirSense", 3941.01],
-  ["Máscara Facial AirFit F30i - ResMed", 308.0],
-  [
-    "kir CPAP Automático Airsense S10 - ResMed + Máscara YF-01 - Yuwell",
-    4167.0,
-  ],
-  ["Máscara Nasal Therapy 3100 SP - Philips", 400.0],
-  ["Filtro Bacteriológico Airlife Trilogy - Vyaire", 80.0],
-  ["Traqueia Branca para CPAP - Nacional", 200.12],
-  ["Água Destilada - 5L", 45.0],
-  ["Tubo de Conexão para Concentrador - Salter Labs", 120.0],
-  ["Fixador Quattro FX - Nacional", 340.0],
-  ["Concentrador de Oxigênio 5LPM 110V - Yuwell", 6000.0],
-  ["Circuito de Ventilação Passivo Adulto - Phillips", 300.0],
-  ["Filtro Eletrostático Adulto - GVS", 67.0],
-  ["Máscara Nasal iVolve N5A - BMC", 560.0],
+  ["S10 AirSense", 3941.01, "1.png"],
+  ["Máscara Facial AirFit F30i - ResMed", 308.0, "2.png"],
+  ["kit CPAP Automático Airsense S10 - ResMed + Máscara YF-01 - Yuwell", 4167.0, "3.png"],
+  ["Máscara Nasal Therapy 3100 SP - Philips", 400.0, "4.png"],
+  ["Traqueia Branca para CPAP - Nacional", 200.12, "5.png"],
+  ["Água Destilada - 5L", 45.0, "6.png"],
+  ["Tubo de Conexão para Concentrador - Salter Labs", 120.0, "7.png"],
+  ["Fixador Quattro FX - Nacional", 340.0, "8.png"],
+  ["Concentrador de Oxigênio 5LPM 110V - Yuwell", 6000.0, "9.png"],
+  ["Circuito de Ventilação Passivo Adulto - Phillips", 300.0, "10.png"],
+  ["Filtro Eletrostático Adulto - GVS", 67.0, "11.png"],
+  ["Máscara Nasal iVolve N5A - BMC", 560.0, "12.png"],
+  ["Filtro Bacteriológico Airlife Trilogy - Vyaire", 80.0, "13.png"],
 ];
 
 function itemAleatorio(lista) {
@@ -60,6 +58,8 @@ var jump = () => {
     score_label.innerHTML = `${valor.toFixed(2)}`;
     msg_label.innerHTML = "";
     msg_label.innerHTML = item[0];
+    vendas.src = `./img/vendas/${item[2]}`;
+    console.log(`./img/vendas/${item[2]}`);
     msg_div.style.animation = "subir 2s ease infinite";
   }, 500);
 };
@@ -72,11 +72,7 @@ const cuidado = setInterval(() => {
 const loop = setInterval(() => {
   if (!gameRunning) return; // Se o jogo não estiver em execução, não faça nada
 
-  meuAudio.play().then(function() {
-    console.log("Áudio iniciado!");
-  }).catch(function(error) {
-    console.log("Erro ao iniciar áudio:", error);
-  });
+  meuAudio.play();
 
   const pipePosition = pipe.offsetLeft;
   const marioPosition = +window
@@ -95,7 +91,7 @@ const loop = setInterval(() => {
     mario.style.animation = "animacaoObjeto 2s ease-in-out forwards";
     mario.style.bottom = `${marioPosition}px`;
     mario.src = "./img/game-over.png";
-    mario.style.width = "90px";
+    mario.style.width = "100px";
     mario.style.marginLeft = "140px";
     score_label.style.color = "red";
     perdeu.style.color = "red";
@@ -121,7 +117,7 @@ const loop = setInterval(() => {
 function atualizarValor(h2) {
   let valor = parseFloat(h2.textContent);
   let desconto = 0.2; // 10%
-  let intervalo = 80; // 0.25 segundos
+  let intervalo = 60; // 0.25 segundos
 
   let contador = 0;
   let interval = setInterval(function () {

@@ -18,6 +18,11 @@
   background-repeat: no-repeat;
 }
 
+.vendas {
+  background-color: #fff;
+  border-radius: 10px;
+  border: 6px solid #ffee09;
+}
 .pipe {
   position: absolute;
   bottom: 0;
@@ -84,7 +89,7 @@
 }
 
 .mario {
-  width: 90px;
+  width: 100px;
   position: absolute;
   bottom: -3px;
 }
