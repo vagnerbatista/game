@@ -18,23 +18,26 @@ const cpapCuidado = [
   "Cliente: A máscara rasgou, tem garantia? ",
   "Ciente: Compra o meu CPAP de novo?",
   "Alerta: Olha o cartão clonado",
-  "Cuidado: Olha o Hacker querendo validar o cartão"
+  "Cuidado: Olha o Hacker querendo validar o cartão",
 ];
 
 const cpapItens = [
   ["S10 AirSense", 3941.01],
-  ["Máscara Facial AirFit F30i - ResMed", 308.00],
-  ["kir CPAP Automático Airsense S10 - ResMed + Máscara YF-01 - Yuwell", 4167.00],
-  ["Máscara Nasal Therapy 3100 SP - Philips", 400.00],
-  ["Filtro Bacteriológico Airlife Trilogy - Vyaire", 80.00],
+  ["Máscara Facial AirFit F30i - ResMed", 308.0],
+  [
+    "kir CPAP Automático Airsense S10 - ResMed + Máscara YF-01 - Yuwell",
+    4167.0,
+  ],
+  ["Máscara Nasal Therapy 3100 SP - Philips", 400.0],
+  ["Filtro Bacteriológico Airlife Trilogy - Vyaire", 80.0],
   ["Traqueia Branca para CPAP - Nacional", 200.12],
-  ["Água Destilada - 5L", 45.00],
-  ["Tubo de Conexão para Concentrador - Salter Labs", 120.00],
-  ["Fixador Quattro FX - Nacional", 340.00],
-  ["Concentrador de Oxigênio 5LPM 110V - Yuwell", 6000.00],
-  ["Circuito de Ventilação Passivo Adulto - Phillips", 300.00],
-  ["Filtro Eletrostático Adulto - GVS", 67.00],
-  ["Máscara Nasal iVolve N5A - BMC", 560.00]
+  ["Água Destilada - 5L", 45.0],
+  ["Tubo de Conexão para Concentrador - Salter Labs", 120.0],
+  ["Fixador Quattro FX - Nacional", 340.0],
+  ["Concentrador de Oxigênio 5LPM 110V - Yuwell", 6000.0],
+  ["Circuito de Ventilação Passivo Adulto - Phillips", 300.0],
+  ["Filtro Eletrostático Adulto - GVS", 67.0],
+  ["Máscara Nasal iVolve N5A - BMC", 560.0],
 ];
 
 function itemAleatorio(lista) {
@@ -44,15 +47,10 @@ function itemAleatorio(lista) {
 
 var jump = () => {
   mario.classList.add("jump");
-  
+
   setTimeout(() => {
     if (!gameRunning) return; // Se o jogo não estiver em execução, não faça nada
-    var item = itemAleatorio(cpapItens);
-    valor += item[1];
     mario.classList.remove("jump");
-    score_label.innerHTML = `${valor.toFixed(2)}`;
-    msg_label.innerHTML = "";
-    msg_label.innerHTML = item[0];
     msg_div.style.animation = "subir 2s ease infinite";
   }, 500);
 };
@@ -68,30 +66,42 @@ const loop = setInterval(() => {
   const marioPosition = +window
     .getComputedStyle(mario)
     .bottom.replace("px", "");
+  //console.log(`Fora: pipe: ${pipePosition} pipe: ${pipePosition} mario: ${marioPosition}`)
   if (pipePosition < 110 && pipePosition > 0 && marioPosition < 100) {
-    nuvem.style.animationPlayState = 'paused';
+    //console.log(`Dentro: pipe: ${pipePosition < 110} pipe: ${pipePosition > 0} mario: ${marioPosition < 100}`)
+    nuvem.style.animationPlayState = "paused";
     msg_div.style.animation = "none";
     pipe.style.animation = "none";
     pipe.style.left = `${pipePosition}px`;
     mario.style.animation = "animacaoObjeto 2s ease-in-out forwards";
-    mario.style.bottom = `${marioPosition}px` 
-    mario.src = "./img/game-over.png"
-    mario.style.width = "90px"
-    mario.style.marginLeft = "50px"
+    mario.style.bottom = `${marioPosition}px`;
+    mario.src = "./img/game-over.png";
+    mario.style.width = "90px";
+    mario.style.marginLeft = "50px";
     score_label.style.color = "red";
     score_label.innerHTML = `${(valor * -1).toFixed(2)}`;
-    msg_label.innerHTML = "O Criente desistiu da compra."
+    msg_label.innerHTML = "O Criente desistiu da compra.";
     perdeu.style.color = "red";
     perdeu.innerHTML = "Que Pena, Você não bateu a meta!";
     clearInterval(loop);
     clearInterval(cuidado);
     gameRunning = false; // Define o jogo como não em execução
     jump = () => {};
-    setTimeout(() =>{
+    setTimeout(() => {
       perdeu.innerHTML = "";
       document.getElementById("restartButton").style.display = "block";
     }, 2000);
-
+  } else if (
+    pipePosition < 126 &&
+    pipePosition > 115 &&
+    marioPosition > 90 &&
+    marioPosition < 180
+  ) {
+    var item = itemAleatorio(cpapItens);
+    valor += item[1];
+    score_label.innerHTML = `${valor.toFixed(2)}`;
+    msg_label.innerHTML = "";
+    msg_label.innerHTML = `Nova Venda: ${item[0]}`;
   }
 }, 10);
 
@@ -101,7 +111,7 @@ document.getElementById("startButton").addEventListener("click", () => {
   jump(); // Chama a função de pulo para começar o jogo
 });
 
-document.addEventListener("keydown", () =>{
+document.addEventListener("keydown", () => {
   gameRunning = true;
 });
 
